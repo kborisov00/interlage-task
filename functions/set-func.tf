@@ -36,7 +36,7 @@ resource "aws_apigatewayv2_integration" "apigateway_integration_set_func" {
 resource "aws_apigatewayv2_route" "apigateway_route_set_func" {
   api_id = aws_apigatewayv2_api.apigateway_set_func.id
 
-  route_key = "POST /"
+  route_key = "POST /submissions"
   target    = "integrations/${aws_apigatewayv2_integration.apigateway_integration_set_func.id}"
 }
 

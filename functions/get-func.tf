@@ -33,10 +33,17 @@ resource "aws_apigatewayv2_integration" "apigateway_integration_get_func" {
   integration_method = "POST"
 }
 
-resource "aws_apigatewayv2_route" "apigateway_route_get_func" {
+resource "aws_apigatewayv2_route" "apigateway_route_get_func_all" {
   api_id = aws_apigatewayv2_api.apigateway_get_func.id
 
-  route_key = "GET /"
+  route_key = "GET /submissions"
+  target    = "integrations/${aws_apigatewayv2_integration.apigateway_integration_get_func.id}"
+}
+
+resource "aws_apigatewayv2_route" "apigateway_route_get_func_one" {
+  api_id = aws_apigatewayv2_api.apigateway_get_func.id
+
+  route_key = "GET /submissions/{id}"
   target    = "integrations/${aws_apigatewayv2_integration.apigateway_integration_get_func.id}"
 }
 

@@ -9,9 +9,11 @@
   "dependencies": {
     "@types/node": "^18.6.1",
     "aws-lambda": "^1.0.7",
+    "aws-sdk": "^2.1183.0",
     "typescript": "^4.7.4"
   },
   "devDependencies": {
+    "@aws-sdk/types": "^3.127.0",
     "@types/aws-lambda": "^8.10.101",
     "copy-webpack-plugin": "^11.0.0",
     "ts-loader": "^9.3.1",
