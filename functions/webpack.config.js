@@ -2,21 +2,19 @@ const path = require("path");
 
 const sourcePath = path.join(__dirname, "src");
 
-const getFunctionFolderName = "get-function";
-const getFunctionPath = path.join(sourcePath, getFunctionFolderName);
 const getFunctionFileName = "get-function.ts";
+const getFunctionPath = path.join(sourcePath, getFunctionFileName);
 
-const setFunctionFolderName = "set-function";
-const setFunctionPath = path.join(sourcePath, setFunctionFolderName);
 const setFunctionFileName = "set-function.ts";
+const setFunctionPath = path.join(sourcePath, setFunctionFileName);
 
 module.exports = {
   target: "node",
   stats: "minimal",
   mode: "production",
   entry: {
-    "get-function": path.join(getFunctionPath, getFunctionFileName),
-    "set-function": path.join(setFunctionPath, setFunctionFileName),
+    "get-function": getFunctionPath,
+    "set-function": setFunctionPath,
   },
   output: {
     clean: true,

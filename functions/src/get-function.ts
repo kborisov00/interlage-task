@@ -1,7 +1,7 @@
 import { DynamoDB } from "aws-sdk";
 import { APIGatewayProxyResult, APIGatewayEvent } from "aws-lambda";
 
-import dynamo from "../services/dynamodb";
+import dynamo from "./dynamodb";
 
 export const lambdaHandler = async (
   event: APIGatewayEvent
