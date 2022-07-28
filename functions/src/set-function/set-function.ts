@@ -1,18 +1,17 @@
 import { DynamoDB } from "aws-sdk";
 import { randomUUID } from "crypto";
-import { APIGatewayProxyResult } from "aws-lambda";
-import { PutItemInputAttributeMap } from "aws-sdk/clients/dynamodb";
+import { APIGatewayProxyResult, APIGatewayEvent } from "aws-lambda";
 
 import dynamo from "../services/dynamodb";
 
 export const lambdaHandler = async (
-  event: PutItemInputAttributeMap
+  event: APIGatewayEvent
 ): Promise<APIGatewayProxyResult> => {
   const dynamoEvent: DynamoDB.DocumentClient.PutItemInput = {
     TableName: "submissions",
     Item: {
       id: randomUUID(),
-      ...event.body,
+      ...JSON.parse(event.body || "{}"),
     },
   };
 
