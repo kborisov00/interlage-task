@@ -10,7 +10,8 @@
     "@types/node": "^18.6.1",
     "aws-lambda": "^1.0.7",
     "aws-sdk": "^2.1183.0",
-    "typescript": "^4.7.4"
+    "typescript": "^4.7.4",
+    "zod": "^3.17.10"
   },
   "devDependencies": {
     "@aws-sdk/types": "^3.127.0",
