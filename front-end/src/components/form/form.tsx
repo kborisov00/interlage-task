@@ -1,4 +1,7 @@
+import React, { useState, FormEvent } from "react";
 import styled from "styled-components";
+
+import { FormProvider } from "contexts/form.context";
 
 import { FormProps } from "./form.interface";
 import FormRow from "./components/form-row/form-row";
@@ -10,19 +13,51 @@ const StyledColumn = styled.div`
   flex-direction: column;
 `;
 
-function Form({ fieldSet }: FormProps) {
-  return (
-    <StyledColumn>
-      {fieldSet.map((item) => (
-        <>
-          {Array.isArray(item) && item.length > 0 && (
-            <FormRow key={item[0].id} items={item as any} />
-          )}
+const DEFAULT_STATE = {
+  firstName: "",
+  lastName: "",
+  email: "",
+  address1: "",
+  city: "",
+  state: "",
+  zip: "",
+  phone: "",
+  jobTitle: "",
+  reason: "",
+};
 
-          {!Array.isArray(item) && <FormInput item={item as any} />}
-        </>
-      ))}
-    </StyledColumn>
+function Form({ fieldSet }: FormProps) {
+  const [formState, setFormState] = useState(DEFAULT_STATE);
+
+  const handleChange = (event: any) => {
+    const { name, value } = event.target;
+
+    setFormState((prevState) => ({...prevState, [name]: value}));
+  };
+
+  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    console.log("submitted");
+  };
+
+  return (
+    <form onSubmit={handleSubmit}>
+      <FormProvider value={{ state: formState, handleChange }}>
+        <StyledColumn>
+          {fieldSet.map((item) => (
+            <React.Fragment key={Array.isArray(item) ? item[0].id : item.id}>
+              {Array.isArray(item) && item.length > 0 && (
+                <FormRow items={item as any} />
+              )}
+
+              {!Array.isArray(item) && <FormInput item={item as any} />}
+            </React.Fragment>
+          ))}
+        </StyledColumn>
+
+        <button type="submit">submit</button>
+      </FormProvider>
+    </form>
   );
 }
 

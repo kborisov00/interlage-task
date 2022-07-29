@@ -1,9 +1,11 @@
+import "styles/reset.css";
+
 import React from "react";
 import styled from "styled-components";
-import fieldSet from "./field-set.json";
 
-import "styles/reset.css";
 import Form from "components/form/form";
+
+import fieldSet from "./field-set.json";
 
 const StyledCenter = styled.div`
   display: flex;

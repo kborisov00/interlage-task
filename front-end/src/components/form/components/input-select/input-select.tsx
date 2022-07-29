@@ -7,9 +7,14 @@ const StyledSelect = styled.select`
   flex: 1;
 `;
 
-function InputSelectComponent({ data }: InputSelectProps) {
+function InputSelectComponent({ data, value, onChange }: InputSelectProps) {
   return (
-    <StyledSelect placeholder={data.placeholder}>
+    <StyledSelect
+      value={value}
+      name={data.id}
+      onChange={onChange}
+      placeholder={data.placeholder}
+    >
       {data.options.map((option) => (
         <option key={option} value={option}>
           {option}

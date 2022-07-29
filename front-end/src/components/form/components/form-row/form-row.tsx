@@ -12,7 +12,7 @@ function FormRow({ items }: FormRowProps) {
   return (
     <StyledRow>
       {items.map((item) => (
-        <FormInput item={item} />
+        <FormInput key={item.id} item={item} />
       ))}
     </StyledRow>
   );

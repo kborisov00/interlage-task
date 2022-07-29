@@ -8,8 +8,16 @@ const StyledInput = styled.input`
   width: 100%;
 `;
 
-function InputTextComponent({ data }: InputTextProps) {
-  return <StyledInput type="text" placeholder={data.placeholder} />;
+function InputTextComponent({ data, value, onChange }: InputTextProps) {
+  return (
+    <StyledInput
+      value={value}
+      name={data.id}
+      type="text"
+      placeholder={data.placeholder}
+      onChange={onChange}
+    />
+  );
 }
 
 export default InputTextComponent;
