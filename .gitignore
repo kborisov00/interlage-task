@@ -3,3 +3,4 @@ build
 aws-credentials
 TODO.md
 .terraform
+.env
