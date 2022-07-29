@@ -27,7 +27,26 @@ resource "aws_iam_policy" "iam_policy_for_lambda" {
   name         = "aws_iam_policy_for_terraform_aws_lambda_role"
   path         = "/"
   description  = "AWS IAM Policy for managing aws lambda role"
-  policy = file("policy.json")
+  policy = <<EOF
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Action": [
+        "dynamodb:BatchGetItem",
+        "dynamodb:GetItem",
+        "dynamodb:Query",
+        "dynamodb:Scan",
+        "dynamodb:BatchWriteItem",
+        "dynamodb:PutItem",
+        "dynamodb:UpdateItem"
+      ],
+      "Resource": "arn:aws:dynamodb:${var.aws_region}:${var.aws_account_id}:table/${var.db_table_name}"
+    }
+  ]
+}
+  EOF
 }
 
 resource "aws_iam_role_policy_attachment" "attach_iam_policy_to_iam_role" {
