@@ -21,24 +21,26 @@ interface ValidationReturn {
 }
 
 export const validateSubmission = (body: string | null): ValidationReturn => {
-  let parsedBody: Submission;
-
   try {
-    parsedBody = JSON.parse(body || "{}");
-  } catch (err) {
-    const error: ZodIssue = {
-      code: "custom",
-      path: [],
-      message: "Invalid JSON"
-    };
-
-    return { errors: [error] };
-  }
-
-  try {
+    const parsedBody = JSON.parse(body || "{}");
     submissionSchema.parse(parsedBody);
+
     return { errors: [], body: parsedBody };
-  } catch (errors: any) {
-    return { errors: errors.issues };
+  } catch (e: any) {
+    if (e instanceof ZodError) {
+      return { errors: e.issues };
+    }
+
+    if (e instanceof SyntaxError) {
+      const error: ZodIssue = {
+        code: "custom",
+        path: [],
+        message: e.message,
+      };
+
+      return { errors: [error] };
+    }
+
+    return { errors: [e] };
   }
 };
