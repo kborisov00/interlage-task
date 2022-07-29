@@ -1,10 +1,10 @@
 import { DynamoDB } from "aws-sdk";
 import { randomUUID } from "crypto";
 
-import { RouterController } from "./mini-router";
-import { validateSubmission } from "./validation";
-import { DYNAMODB_TABLE_NAME } from "./constants";
-import dynamo from "./dynamodb";
+import dynamo from "../dynamodb";
+import { RouterController } from "../mini-router";
+import { validateSubmission } from "../validation";
+import { DYNAMODB_TABLE_NAME } from "../constants";
 
 export const createSubmission: RouterController = async (event) => {
   const { errors, body } = await validateSubmission(event.body);
