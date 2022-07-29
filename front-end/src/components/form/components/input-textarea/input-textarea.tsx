@@ -12,8 +12,8 @@ function InputTextAreaComponent({ data, value, onChange }: InputTextAreaProps) {
     <StyledTextArea
       value={value}
       name={data.id}
-      placeholder={data.placeholder}
       onChange={onChange}
+      placeholder={data.placeholder}
     ></StyledTextArea>
   );
 }

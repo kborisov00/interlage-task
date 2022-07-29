@@ -32,7 +32,7 @@ function Form({ fieldSet }: FormProps) {
   const handleChange = (event: any) => {
     const { name, value } = event.target;
 
-    setFormState((prevState) => ({...prevState, [name]: value}));
+    setFormState((prevState) => ({ ...prevState, [name]: value }));
   };
 
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
@@ -47,10 +47,10 @@ function Form({ fieldSet }: FormProps) {
           {fieldSet.map((item) => (
             <React.Fragment key={Array.isArray(item) ? item[0].id : item.id}>
               {Array.isArray(item) && item.length > 0 && (
-                <FormRow items={item as any} />
+                <FormRow items={item} />
               )}
 
-              {!Array.isArray(item) && <FormInput item={item as any} />}
+              {!Array.isArray(item) && <FormInput item={item} />}
             </React.Fragment>
           ))}
         </StyledColumn>
