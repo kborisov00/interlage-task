@@ -3,12 +3,13 @@ import { randomUUID } from "crypto";
 import { APIGatewayProxyResult, APIGatewayEvent } from "aws-lambda";
 
 import dynamo from "./dynamodb";
+import { DYNAMODB_TABLE_NAME } from "./constants";
 
 export const lambdaHandler = async (
   event: APIGatewayEvent
 ): Promise<APIGatewayProxyResult> => {
   const dynamoEvent: DynamoDB.DocumentClient.PutItemInput = {
-    TableName: "submissions",
+    TableName: DYNAMODB_TABLE_NAME,
     Item: {
       id: randomUUID(),
       ...JSON.parse(event.body || "{}"),

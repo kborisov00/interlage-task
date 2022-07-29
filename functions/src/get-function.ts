@@ -2,6 +2,7 @@ import { DynamoDB } from "aws-sdk";
 import { APIGatewayProxyResult, APIGatewayEvent } from "aws-lambda";
 
 import dynamo from "./dynamodb";
+import { DYNAMODB_TABLE_NAME } from "./constants";
 
 export const lambdaHandler = async (
   event: APIGatewayEvent
@@ -11,7 +12,7 @@ export const lambdaHandler = async (
   // url.com/submissions
   if (!id) {
     const { $response } = await dynamo
-      .scan({ TableName: "submissions" })
+      .scan({ TableName: DYNAMODB_TABLE_NAME})
       .promise();
     const { error, data } = $response;
 
@@ -30,7 +31,7 @@ export const lambdaHandler = async (
 
   // url.com/submissions/{id}
   const dynamoEvent: DynamoDB.DocumentClient.GetItemInput = {
-    TableName: "submissions",
+    TableName: DYNAMODB_TABLE_NAME,
     Key: { id },
   };
 
