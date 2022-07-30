@@ -1,6 +1,13 @@
 resource "aws_apigatewayv2_api" "apigateway" {
   name          = "apigateway"
   protocol_type = "HTTP"
+
+  cors_configuration {
+    allow_origins = ["*"]
+    allow_methods = ["POST", "GET"]
+    allow_headers = ["content-type"]
+    max_age= 300
+  }
 }
 
 resource "aws_apigatewayv2_stage" "apigateway_stage" {
