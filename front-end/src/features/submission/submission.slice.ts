@@ -2,30 +2,31 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { RootState } from "store/store";
 
 export interface SubmissionState {
-  [key: string]: string | null;
+  [key: string]: string | undefined;
+
   firstName: string;
   lastName: string;
   email: string;
-  address1: string | null;
-  city: string | null;
-  state: string | null;
-  zip: string | null;
+  address1: string | undefined;
+  city: string | undefined;
+  state: string | undefined;
+  zip: string | undefined;
   phone: string;
-  jobTitle: string | null;
-  reason: string | null;
+  jobTitle: string | undefined;
+  reason: string | undefined;
 }
 
 const initialState: SubmissionState = {
   firstName: "",
   lastName: "",
   email: "",
-  address1: "",
-  city: "",
-  state: "",
-  zip: "",
+  address1: undefined,
+  city: undefined,
+  state: undefined,
+  zip: undefined,
   phone: "",
-  jobTitle: "",
-  reason: "",
+  jobTitle: undefined,
+  reason: undefined,
 };
 
 export const submissionSlice = createSlice({
