@@ -7,6 +7,7 @@ import {
   selectSubmission,
   setSubmission,
 } from "features/submission/submission.slice";
+import { useCreateSubmissionMutation } from "features/submission/submission.service";
 
 import { FormProps } from "./form.interface";
 import FormRow from "./components/form-row/form-row";
@@ -21,6 +22,7 @@ const StyledColumn = styled.div`
 function Form({ fieldSet }: FormProps) {
   const dispatch = useAppDispatch();
   const submissionState = useAppSelector(selectSubmission);
+  const [createSubmission, { isLoading }] = useCreateSubmissionMutation();
 
   const handleChange = (event: any) => {
     const { name, value } = event.target;
@@ -29,7 +31,7 @@ function Form({ fieldSet }: FormProps) {
 
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    console.log("submitted");
+    createSubmission(submissionState);
   };
 
   return (
@@ -49,7 +51,7 @@ function Form({ fieldSet }: FormProps) {
           })}
         </StyledColumn>
 
-        <button type="submit">submit</button>
+        <button type="submit">{isLoading ? "Loading..." : "submit"}</button>
       </FormProvider>
     </form>
   );
