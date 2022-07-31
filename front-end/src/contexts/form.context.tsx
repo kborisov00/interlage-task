@@ -2,7 +2,7 @@ import { createContext, useContext, ChangeEvent } from "react";
 import { SubmissionState } from "features/submission/submission.slice";
 
 export interface FormContextState {
-  state: SubmissionState;
+  state: SubmissionState["submission"];
   handleChange: (
     event: ChangeEvent<
       HTMLTextAreaElement | HTMLSelectElement | HTMLInputElement

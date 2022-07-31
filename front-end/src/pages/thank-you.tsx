@@ -1,10 +1,11 @@
 import { useAppSelector } from "hooks";
-import { selectSubmission } from "features/submission/submission.slice";
+import { selectLatestSubmissionId } from "features/submission/submission.slice";
+import { useGetSubmissionQuery } from "features/submission/submission.service";
 
 function ThankYouPage() {
-  const submissionState = useAppSelector(selectSubmission);
-
-  return <h1>thank you, {submissionState.firstName}</h1>
+  const latestSubmissionId = useAppSelector(selectLatestSubmissionId);
+  const { data } = useGetSubmissionQuery(latestSubmissionId!);
+  return <h1>thank you, {JSON.stringify(data)}</h1>
 }
 
 export default ThankYouPage;

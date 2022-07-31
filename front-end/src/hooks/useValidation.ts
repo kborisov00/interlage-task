@@ -31,7 +31,7 @@ function useValidation() {
   const [errorsState, setErrorsState] =
     useState<Record<string, string[]>>(initialState);
 
-  const validate = (fieldset: FieldSet, state: SubmissionState) => {
+  const validate = (fieldset: FieldSet, state: SubmissionState["submission"]) => {
     const flatFieldSet = fieldset.flat();
 
     const errorMap: Record<string, string[]> = flatFieldSet.reduce(
