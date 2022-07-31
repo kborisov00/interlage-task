@@ -22,56 +22,40 @@ const StyledErrorText = styled.p`
 function FormInput({ item }: FormInputProps) {
   const { state, handleChange, errors } = useFormContext();
 
-  if (item.type === "text") {
-    return (
-      <StyledColumn>
+  return (
+    <StyledColumn>
+      {item.type === "text" && (
         <InputTextComponent
           data={item}
           onChange={handleChange}
           value={state[item.id]}
           hasError={errors[item.id].length > 0}
         />
+      )}
 
-        {errors[item.id].length > 0 && (
-          <StyledErrorText>{errors[item.id][0]}</StyledErrorText>
-        )}
-      </StyledColumn>
-    );
-  }
-
-  if (item.type === "select") {
-    return (
-      <StyledColumn>
-        <InputSelectComponent
-          data={item}
-          onChange={handleChange}
-          value={state[item.id]}
-        />
-
-        {errors[item.id].length > 0 && (
-          <StyledErrorText>{errors[item.id][0]}</StyledErrorText>
-        )}
-      </StyledColumn>
-    );
-  }
-
-  if (item.type === "textarea") {
-    return (
-      <StyledColumn>
+      {item.type === "textarea" && (
         <InputTextAreaComponent
           data={item}
           onChange={handleChange}
           value={state[item.id]}
+          hasError={errors[item.id].length > 0}
         />
+      )}
 
-        {errors[item.id].length > 0 && (
-          <StyledErrorText>{errors[item.id][0]}</StyledErrorText>
-        )}
-      </StyledColumn>
-    );
-  }
+      {item.type === "select" && (
+        <InputSelectComponent
+          data={item}
+          onChange={handleChange}
+          value={state[item.id]}
+          hasError={errors[item.id].length > 0}
+        />
+      )}
 
-  return null;
+      {errors[item.id].length > 0 && (
+        <StyledErrorText>{errors[item.id][0]}</StyledErrorText>
+      )}
+    </StyledColumn>
+  );
 }
 
 export default FormInput;
