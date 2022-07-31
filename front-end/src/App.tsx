@@ -1,27 +1,16 @@
-import "styles/reset.css";
-
 import React from "react";
-import styled from "styled-components";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 
-import Form from "components/form/form";
-import { FieldSet } from "components/form/form.interface";
-
-import fieldSet from "./field-set.json";
-
-const StyledCenter = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  min-height: 100vh;
-  min-width: 100vw;
-  overflow-x: hidden;
-`;
+import { HomePage, ThankYouPage} from "pages";
 
 function App() {
   return (
-    <StyledCenter>
-      <Form fieldSet={fieldSet as FieldSet} />
-    </StyledCenter>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+        <Route path="/thank-you" element={<ThankYouPage />} />
+      </Routes>
+    </BrowserRouter>
   );
 }
 

@@ -1,5 +1,6 @@
 import React, { ChangeEvent, FormEvent } from "react";
 import styled from "styled-components";
+import { useNavigate } from "react-router-dom";
 
 import { FormProvider } from "contexts/form.context";
 import { useAppDispatch, useAppSelector } from "hooks";
@@ -20,6 +21,7 @@ const StyledColumn = styled.div`
 `;
 
 function Form({ fieldSet }: FormProps) {
+  const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const submissionState = useAppSelector(selectSubmission);
   const [createSubmission, { isLoading }] = useCreateSubmissionMutation();
@@ -33,9 +35,15 @@ function Form({ fieldSet }: FormProps) {
     dispatch(setSubmission({ name, value }));
   };
 
-  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    createSubmission(submissionState);
+
+    try {
+      await createSubmission(submissionState).unwrap();
+      navigate("/thank-you", { replace: true });
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   return (

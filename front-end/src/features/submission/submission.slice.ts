@@ -1,20 +1,18 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { RootState } from "store/store";
 
-import { submissionsAPI } from "./submission.service";
-
 export interface SubmissionState {
-  [key: string]: string;
+  [key: string]: string | null;
   firstName: string;
   lastName: string;
   email: string;
-  address1: string;
-  city: string;
-  state: string;
-  zip: string;
+  address1: string | null;
+  city: string | null;
+  state: string | null;
+  zip: string | null;
   phone: string;
-  jobTitle: string;
-  reason: string;
+  jobTitle: string | null;
+  reason: string | null;
 }
 
 const initialState: SubmissionState = {
@@ -41,17 +39,6 @@ export const submissionSlice = createSlice({
       const { name, value } = action.payload;
       state[name] = value;
     },
-  },
-  extraReducers: (builder) => {
-    builder.addMatcher(
-      submissionsAPI.endpoints.createSubmission.matchFulfilled,
-      (state) => {
-        // reset state
-        Object.entries(initialState).forEach(([key, value]) => {
-          state[key] = value;
-        });
-      }
-    );
   },
 });
 
