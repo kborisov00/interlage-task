@@ -5,4 +5,5 @@ export interface InputTextProps {
   data: InputText;
   onChange?: ChangeEventHandler<HTMLInputElement>
   value?: string;
+  hasError?: boolean;
 }

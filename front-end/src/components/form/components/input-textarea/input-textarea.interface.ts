@@ -5,4 +5,5 @@ export interface InputTextAreaProps {
   data: InputTextArea;
   onChange?: ChangeEventHandler<HTMLTextAreaElement>;
   value?: string;
+  hasError?: boolean;
 }

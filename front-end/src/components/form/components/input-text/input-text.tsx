@@ -2,12 +2,12 @@ import styled from "styled-components";
 
 import { InputTextProps } from "./input-text.interface";
 
-const StyledInput = styled.input`
-  border: 1px solid black;
+const StyledInput = styled.input<{hasError?: boolean}>`
+  border: 1px solid ${props => props.hasError ? "red" : "black"};
   flex: 1;
 `;
 
-function InputTextComponent({ data, value, onChange }: InputTextProps) {
+function InputTextComponent({ data, value, onChange, hasError }: InputTextProps) {
   return (
     <StyledInput
       value={value}
@@ -15,6 +15,7 @@ function InputTextComponent({ data, value, onChange }: InputTextProps) {
       type="text"
       onChange={onChange}
       placeholder={data.placeholder}
+      hasError={hasError}
     />
   );
 }

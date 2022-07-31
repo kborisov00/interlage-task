@@ -6,4 +6,5 @@ export interface InputSelectProps {
   data: InputSelect;
   onChange?: ChangeEventHandler<HTMLSelectElement>;
   value?: string;
+  hasError?: boolean;
 }

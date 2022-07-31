@@ -8,6 +8,7 @@ export interface FormContextState {
       HTMLTextAreaElement | HTMLSelectElement | HTMLInputElement
     >
   ) => void;
+  errors: Record<string, string[]>
 }
 
 export const FormContext = createContext<FormContextState | null>(null);

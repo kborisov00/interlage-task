@@ -2,7 +2,7 @@ import { FormEvent } from "react";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 
-import { useAppDispatch, useAppSelector } from "hooks";
+import { useAppDispatch, useAppSelector, useValidation } from "hooks";
 import { FormContextState, FormProvider } from "contexts/form.context";
 import {
   setSubmission,
@@ -26,6 +26,8 @@ function Form({ fieldSet }: FormProps) {
   const submissionState = useAppSelector(selectSubmission);
   const [createSubmission, { isLoading }] = useCreateSubmissionMutation();
 
+  const { errors, validate } = useValidation();
+
   const handleChange: FormContextState["handleChange"] = (event) => {
     const { name, value } = event.target;
     dispatch(setSubmission({ name, value }));
@@ -33,6 +35,11 @@ function Form({ fieldSet }: FormProps) {
 
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+    const hasErrors = validate(fieldSet, submissionState);
+
+    if (hasErrors) {
+      return;
+    }
 
     try {
       await createSubmission(submissionState).unwrap();
@@ -44,7 +51,7 @@ function Form({ fieldSet }: FormProps) {
 
   return (
     <form onSubmit={handleSubmit}>
-      <FormProvider value={{ state: submissionState, handleChange }}>
+      <FormProvider value={{ state: submissionState, handleChange, errors }}>
         <StyledColumn>
           {fieldSet.map((item) => {
             if (Array.isArray(item) && item.length > 0) {
@@ -59,7 +66,9 @@ function Form({ fieldSet }: FormProps) {
           })}
         </StyledColumn>
 
-        <button type="submit">{isLoading ? "Loading..." : "submit"}</button>
+        <button type="submit" disabled={isLoading}>
+          {isLoading ? "Loading..." : "submit"}
+        </button>
       </FormProvider>
     </form>
   );
