@@ -1,6 +1,14 @@
-import { createContext, useContext } from "react";
+import { createContext, useContext, ChangeEvent } from "react";
+import { SubmissionState } from "features/submission/submission.slice";
 
-export const FormContext = createContext<{ state: any, handleChange: any } | null>(null);
+export const FormContext = createContext<{
+  state: SubmissionState;
+  handleChange: (
+    event: ChangeEvent<
+      HTMLTextAreaElement | HTMLSelectElement | HTMLInputElement
+    >
+  ) => void;
+} | null>(null);
 
 export const FormProvider = FormContext.Provider;
 

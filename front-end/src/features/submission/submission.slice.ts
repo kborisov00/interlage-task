@@ -3,19 +3,19 @@ import { RootState } from "store/store";
 
 import { submissionsAPI } from "./submission.service";
 
-type SubmissionProperties =
-  | "firstName"
-  | "lastName"
-  | "email"
-  | "address1"
-  | "city"
-  | "state"
-  | "zip"
-  | "phone"
-  | "jobTitle"
-  | "reason";
-
-export type SubmissionState = Record<SubmissionProperties, string>;
+export interface SubmissionState {
+  [key: string]: string;
+  firstName: string;
+  lastName: string;
+  email: string;
+  address1: string;
+  city: string;
+  state: string;
+  zip: string;
+  phone: string;
+  jobTitle: string;
+  reason: string;
+}
 
 const initialState: SubmissionState = {
   firstName: "",
@@ -36,7 +36,7 @@ export const submissionSlice = createSlice({
   reducers: {
     setSubmission: (
       state,
-      action: PayloadAction<{ name: SubmissionProperties; value: string }>
+      action: PayloadAction<{ name: string; value: string }>
     ) => {
       const { name, value } = action.payload;
       state[name] = value;
@@ -48,7 +48,7 @@ export const submissionSlice = createSlice({
       (state) => {
         // reset state
         Object.entries(initialState).forEach(([key, value]) => {
-          state[key as SubmissionProperties] = value;
+          state[key] = value;
         });
       }
     );

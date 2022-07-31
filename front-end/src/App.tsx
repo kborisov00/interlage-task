@@ -4,6 +4,7 @@ import React from "react";
 import styled from "styled-components";
 
 import Form from "components/form/form";
+import { FieldSet } from "components/form/form.interface";
 
 import fieldSet from "./field-set.json";
 
@@ -19,7 +20,7 @@ const StyledCenter = styled.div`
 function App() {
   return (
     <StyledCenter>
-      <Form fieldSet={fieldSet as any} />
+      <Form fieldSet={fieldSet as FieldSet} />
     </StyledCenter>
   );
 }

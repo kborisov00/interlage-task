@@ -1,5 +1,7 @@
+export type FieldSet = (InputItem | InputItem[])[];
+
 export interface FormProps {
-  fieldSet: (InputItem | InputItem[])[];
+  fieldSet: FieldSet;
 }
 
 export interface InputText extends Input {

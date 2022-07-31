@@ -1,4 +1,4 @@
-import React, { FormEvent } from "react";
+import React, { ChangeEvent, FormEvent } from "react";
 import styled from "styled-components";
 
 import { FormProvider } from "contexts/form.context";
@@ -24,7 +24,11 @@ function Form({ fieldSet }: FormProps) {
   const submissionState = useAppSelector(selectSubmission);
   const [createSubmission, { isLoading }] = useCreateSubmissionMutation();
 
-  const handleChange = (event: any) => {
+  const handleChange = (
+    event: ChangeEvent<
+      HTMLTextAreaElement | HTMLSelectElement | HTMLInputElement
+    >
+  ) => {
     const { name, value } = event.target;
     dispatch(setSubmission({ name, value }));
   };
