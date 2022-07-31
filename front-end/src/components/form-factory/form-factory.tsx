@@ -9,7 +9,7 @@ const StyledColumn = styled.div`
   flex-grow: 1;
   flex-direction: column;
 
-  & > *:not(:last-child) {
+  & > * {
     margin-bottom: 10px;
   }
 `;
