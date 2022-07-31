@@ -16,16 +16,18 @@ export const createSubmission: RouterController = async (event) => {
     };
   }
 
+  const submissionId = randomUUID();
+
   const dynamoEvent: DynamoDB.DocumentClient.PutItemInput = {
     TableName: DYNAMODB_TABLE_NAME,
     Item: {
-      id: randomUUID(),
       ...body,
+      id: submissionId,
     },
   };
 
   const { $response } = await dynamo.put(dynamoEvent).promise();
-  const { data, error } = $response;
+  const { error } = $response;
 
   if (error) {
     return {
@@ -36,6 +38,6 @@ export const createSubmission: RouterController = async (event) => {
 
   return {
     statusCode: 200,
-    body: JSON.stringify(data),
+    body: JSON.stringify({ ...body, id: submissionId }),
   };
-}
+};
