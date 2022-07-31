@@ -1,8 +1,6 @@
 import styled from "styled-components";
 
 import Form from "components/form/form";
-import fieldSet from "field-sets/generic-form.json";
-import { FieldSet } from "components/form/form.interface";
 
 const StyledCenter = styled.div`
   display: flex;
@@ -18,7 +16,7 @@ function HomePage() {
   return (
     <StyledCenter>
       <h1>submission form</h1>
-      <Form fieldSet={fieldSet as FieldSet} />
+      <Form />
     </StyledCenter>
   );
 }
