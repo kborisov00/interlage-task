@@ -1,12 +1,12 @@
-import React, { ChangeEvent, FormEvent } from "react";
+import { FormEvent } from "react";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 
-import { FormProvider } from "contexts/form.context";
 import { useAppDispatch, useAppSelector } from "hooks";
+import { FormContextState, FormProvider } from "contexts/form.context";
 import {
-  selectSubmission,
   setSubmission,
+  selectSubmission,
 } from "features/submission/submission.slice";
 import { useCreateSubmissionMutation } from "features/submission/submission.service";
 
@@ -26,11 +26,7 @@ function Form({ fieldSet }: FormProps) {
   const submissionState = useAppSelector(selectSubmission);
   const [createSubmission, { isLoading }] = useCreateSubmissionMutation();
 
-  const handleChange = (
-    event: ChangeEvent<
-      HTMLTextAreaElement | HTMLSelectElement | HTMLInputElement
-    >
-  ) => {
+  const handleChange: FormContextState["handleChange"] = (event) => {
     const { name, value } = event.target;
     dispatch(setSubmission({ name, value }));
   };
