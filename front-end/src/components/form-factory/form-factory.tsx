@@ -8,6 +8,10 @@ const StyledColumn = styled.div`
   display: flex;
   flex-grow: 1;
   flex-direction: column;
+
+  & > *:not(:last-child) {
+    margin-bottom: 10px;
+  }
 `;
 
 function FormFactory({ fieldSet }: FormFactoryProps) {

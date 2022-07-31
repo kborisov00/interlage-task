@@ -6,6 +6,10 @@ import { FormRowProps } from "./form-row.interface";
 const StyledRow = styled.div`
   display: flex;
   width: 100%;
+
+  & > *:not(:last-child) {
+    margin-right: 10px;
+  }
 `;
 
 function FormRow({ items }: FormRowProps) {
