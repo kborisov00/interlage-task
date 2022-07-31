@@ -1,4 +1,6 @@
 import { createContext, useContext, ChangeEvent, FormEvent } from "react";
+
+import { StyledFieldSet } from "styles/misc.styles";
 import { SubmissionState } from "features/submission/submission.slice";
 
 export interface FormContextState {
@@ -21,9 +23,9 @@ export const FormProvider: React.FC<FormProviderProps> = ({
 }) => {
   return (
     <FormContext.Provider value={value}>
-      <fieldset disabled={isDisabled}>
+      <StyledFieldSet disabled={isDisabled}>
         <form onSubmit={onSubmit}>{children}</form>
-      </fieldset>
+      </StyledFieldSet>
     </FormContext.Provider>
   );
 };
