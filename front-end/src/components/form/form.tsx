@@ -1,7 +1,12 @@
-import React, { useState, FormEvent } from "react";
+import React, { FormEvent } from "react";
 import styled from "styled-components";
 
 import { FormProvider } from "contexts/form.context";
+import { useAppDispatch, useAppSelector } from "hooks";
+import {
+  selectSubmission,
+  setSubmission,
+} from "features/submission/submission.slice";
 
 import { FormProps } from "./form.interface";
 import FormRow from "./components/form-row/form-row";
@@ -13,26 +18,13 @@ const StyledColumn = styled.div`
   flex-direction: column;
 `;
 
-const DEFAULT_STATE = {
-  firstName: "",
-  lastName: "",
-  email: "",
-  address1: "",
-  city: "",
-  state: "",
-  zip: "",
-  phone: "",
-  jobTitle: "",
-  reason: "",
-};
-
 function Form({ fieldSet }: FormProps) {
-  const [formState, setFormState] = useState(DEFAULT_STATE);
+  const dispatch = useAppDispatch();
+  const submissionState = useAppSelector(selectSubmission);
 
   const handleChange = (event: any) => {
     const { name, value } = event.target;
-
-    setFormState((prevState) => ({ ...prevState, [name]: value }));
+    dispatch(setSubmission({ name, value }));
   };
 
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
@@ -42,17 +34,19 @@ function Form({ fieldSet }: FormProps) {
 
   return (
     <form onSubmit={handleSubmit}>
-      <FormProvider value={{ state: formState, handleChange }}>
+      <FormProvider value={{ state: submissionState, handleChange }}>
         <StyledColumn>
-          {fieldSet.map((item) => (
-            <React.Fragment key={Array.isArray(item) ? item[0].id : item.id}>
-              {Array.isArray(item) && item.length > 0 && (
-                <FormRow items={item} />
-              )}
+          {fieldSet.map((item) => {
+            if (Array.isArray(item) && item.length > 0) {
+              return <FormRow key={item[0].id} items={item} />;
+            }
 
-              {!Array.isArray(item) && <FormInput item={item} />}
-            </React.Fragment>
-          ))}
+            if (!Array.isArray(item)) {
+              return <FormInput key={item.id} item={item} />;
+            }
+
+            return null;
+          })}
         </StyledColumn>
 
         <button type="submit">submit</button>
