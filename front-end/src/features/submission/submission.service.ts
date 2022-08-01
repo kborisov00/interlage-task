@@ -10,7 +10,7 @@ type GetSubmissionRequest = string;
 type GetSubmissionResponse = SubmissionRecord;
 
 export const submissionsAPI = createApi({
-  reducerPath: "pokemonApi",
+  reducerPath: "submissionApi",
   baseQuery: fetchBaseQuery({ baseUrl: process.env.REACT_APP_API_URL }),
   endpoints: (builder) => ({
     createSubmission: builder.mutation<
