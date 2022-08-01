@@ -51,7 +51,7 @@ function useValidation() {
         }
 
         // @ts-expect-error
-        const hasErrors = acc.hasErrors || errors.length;
+        const hasErrors = (acc.hasErrors || 0) + errors.length;
 
         return { ...acc, hasErrors, [item.id]: errors };
       },
