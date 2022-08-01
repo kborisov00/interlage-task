@@ -53,6 +53,7 @@ export const submissionSlice = createSlice({
       submissionsAPI.endpoints.createSubmission.matchFulfilled,
       (state, { payload }) => {
         state.latestSubmissionId = payload.id;
+        state.submission = initialState.submission;
       }
     );
   },
