@@ -5,10 +5,15 @@ import { FormRowProps } from "./form-row.interface";
 
 const StyledRow = styled.div`
   display: flex;
+  flex-direction: column;
   width: 100%;
 
   & > *:not(:last-child) {
     margin-right: 10px;
+  }
+
+  @media (min-width: 800px) {
+    flex-direction: row;
   }
 `;
 
