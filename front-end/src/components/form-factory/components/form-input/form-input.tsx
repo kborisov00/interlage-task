@@ -10,13 +10,13 @@ import { FormInputProps } from "./form-input.interface";
 function FormInput({ item }: FormInputProps) {
   const { state, handleChange, errors, isReadonly } = useFormContext();
 
-  const commonProps: any = {
+  const commonProps = {
     id: item.id,
     name: item.id,
-    onChange: isReadonly ? null : handleChange, // uncontrolled component error when onChange is passed while readOnly is true
+    onChange: isReadonly ? undefined : handleChange,
     readOnly: isReadonly,
     value: state[item.id],
-    hasError: errors?.[item.id].length,
+    hasError: !!errors?.[item.id].length,
   };
 
   const componentSwitch = () => {
