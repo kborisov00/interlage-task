@@ -44,12 +44,14 @@ function Form() {
 
   return (
     <FormProvider
-      value={{ state: submissionState, handleChange, errors }}
-      onSubmit={handleSubmit}
+      errors={errors}
       isDisabled={isLoading}
+      state={submissionState}
+      onSubmit={handleSubmit}
+      handleChange={handleChange}
     >
       <FormFactory fieldSet={fieldSet as FieldSet} />
-      <button type="submit">{isLoading ? "Loading..." : "submit"}</button>
+      <button type="submit">{isLoading ? "Loading..." : "Submit"}</button>
     </FormProvider>
   );
 }

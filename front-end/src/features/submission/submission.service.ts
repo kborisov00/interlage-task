@@ -5,11 +5,7 @@ type CreateSubmissionRequest = SubmissionState["submission"];
 type CreateSubmissionResponse = SubmissionState["submission"] & { id: string };
 
 type GetSubmissionRequest = string;
-interface GetSubmissionResponse {
-  data: {
-    Item: SubmissionState["submission"] & { id: string };
-  };
-}
+type GetSubmissionResponse  = SubmissionState["submission"] & { id: string };
 
 export const submissionsAPI = createApi({
   reducerPath: "pokemonApi",

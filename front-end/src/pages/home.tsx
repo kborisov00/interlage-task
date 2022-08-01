@@ -1,21 +1,10 @@
-import styled from "styled-components";
-
 import Form from "components/form/form";
-
-const StyledCenter = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  min-height: 100vh;
-  min-width: 100vw;
-  overflow-x: hidden;
-`;
+import { StyledCenter } from "styles/misc.styles";
 
 function HomePage() {
   return (
     <StyledCenter>
-      <h1>submission form</h1>
+      <h1>Submission Form</h1>
       <Form />
     </StyledCenter>
   );

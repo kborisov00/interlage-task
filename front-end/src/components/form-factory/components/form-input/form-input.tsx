@@ -8,14 +8,15 @@ import {
 import { FormInputProps } from "./form-input.interface";
 
 function FormInput({ item }: FormInputProps) {
-  const { state, handleChange, errors } = useFormContext();
+  const { state, handleChange, errors, isReadonly } = useFormContext();
 
-  const commonProps = {
+  const commonProps: any = {
+    id: item.id,
     name: item.id,
-    placeholder: item.placeholder,
-    onChange: handleChange,
+    onChange: isReadonly ? null : handleChange, // uncontrolled component error when onChange is passed while readOnly is true
+    readOnly: isReadonly,
     value: state[item.id],
-    hasError: errors[item.id].length > 0,
+    hasError: errors?.[item.id].length,
   };
 
   const componentSwitch = () => {
@@ -41,10 +42,12 @@ function FormInput({ item }: FormInputProps) {
 
   return (
     <StyledColumn>
+      <label htmlFor={item.id}>{item.placeholder}</label>
+
       {componentSwitch()}
 
-      {errors[item.id].length > 0 && (
-        <StyledErrorText>{errors[item.id][0]}</StyledErrorText>
+      {!isReadonly && !!errors?.[item.id].length && (
+        <StyledErrorText>{errors?.[item.id]?.[0]}</StyledErrorText>
       )}
     </StyledColumn>
   );

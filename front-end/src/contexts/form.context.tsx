@@ -5,25 +5,29 @@ import { SubmissionState } from "features/submission/submission.slice";
 
 export interface FormContextState {
   state: SubmissionState["submission"];
-  handleChange: (
+  handleChange?: (
     event: ChangeEvent<
       HTMLTextAreaElement | HTMLSelectElement | HTMLInputElement
     >
   ) => void;
-  errors: Record<string, string[]>;
+  errors?: Record<string, string[]>;
+  isReadonly?: boolean;
 }
 
 export const FormContext = createContext<FormContextState | null>(null);
 
 export const FormProvider: React.FC<FormProviderProps> = ({
-  value,
+  state,
+  errors,
   onSubmit,
+  isReadonly,
   isDisabled,
+  handleChange,
   children,
 }) => {
   return (
-    <FormContext.Provider value={value}>
-      <StyledFieldSet disabled={isDisabled}>
+    <FormContext.Provider value={{ state, errors, handleChange, isReadonly }}>
+      <StyledFieldSet disabled={isReadonly || isDisabled}>
         <form onSubmit={onSubmit}>{children}</form>
       </StyledFieldSet>
     </FormContext.Provider>
@@ -40,9 +44,8 @@ export function useFormContext() {
   return context;
 }
 
-interface FormProviderProps {
-  value: FormContextState;
-  onSubmit: (event: FormEvent<HTMLFormElement>) => void;
+interface FormProviderProps extends FormContextState {
+  onSubmit?: (event: FormEvent<HTMLFormElement>) => void;
   children: React.ReactNode;
   isDisabled?: boolean;
 }

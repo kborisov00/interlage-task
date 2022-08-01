@@ -17,7 +17,7 @@ const StyledColumn = styled.div`
 function FormFactory({ fieldSet }: FormFactoryProps) {
   return (
     <StyledColumn>
-      {fieldSet.map((item: any) => {
+      {fieldSet.map((item) => {
         if (Array.isArray(item) && item.length > 0) {
           return <FormRow key={item[0].id} items={item} />;
         }
