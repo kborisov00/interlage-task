@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-import { FieldSet } from "components/form/form.interface";
+import { FieldSet } from "components/form-factory/form-factory.interface";
 import { SubmissionState } from "features/submission/submission.slice";
 
 const patterns: Record<string, { pattern: RegExp; errorMessage: string }> = {

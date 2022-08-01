@@ -1,12 +1,10 @@
 import { configureStore, ThunkAction, Action } from "@reduxjs/toolkit";
 
-import counterReducer from "features/counter/counterSlice";
 import submissionReducer from "features/submission/submission.slice";
 import { submissionsAPI } from "features/submission/submission.service";
 
 export const store = configureStore({
   reducer: {
-    counter: counterReducer,
     submission: submissionReducer,
 
     [submissionsAPI.reducerPath]: submissionsAPI.reducer,

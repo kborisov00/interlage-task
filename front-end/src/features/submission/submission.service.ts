@@ -1,11 +1,13 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { SubmissionState } from "./submission.slice";
 
+type SubmissionRecord = SubmissionState["submission"] & { id: string };
+
 type CreateSubmissionRequest = SubmissionState["submission"];
-type CreateSubmissionResponse = SubmissionState["submission"] & { id: string };
+type CreateSubmissionResponse = SubmissionRecord;
 
 type GetSubmissionRequest = string;
-type GetSubmissionResponse  = SubmissionState["submission"] & { id: string };
+type GetSubmissionResponse = SubmissionRecord;
 
 export const submissionsAPI = createApi({
   reducerPath: "pokemonApi",
@@ -23,7 +25,7 @@ export const submissionsAPI = createApi({
     }),
     getSubmission: builder.query<GetSubmissionResponse, GetSubmissionRequest>({
       query: (id) => ({ url: `/submissions/${id}` }),
-      transformResponse: ({data}) => data.Item
+      transformResponse: ({ data }) => data.Item,
     }),
   }),
 });
